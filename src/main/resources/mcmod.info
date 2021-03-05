@@ -1,0 +1,16 @@
+[
+    {
+        "modid": "dka",
+        "name": "DKA",
+        "description": "A lit bit of new Armor",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": ["ijo42"],
+        "credits": "",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
