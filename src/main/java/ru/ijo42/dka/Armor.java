@@ -8,13 +8,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(
         modid = Armor.MOD_ID,
         name = Armor.MOD_NAME,
-        version = Armor.VERSION
+        version = Armor.VERSION,
+        certificateFingerprint = Armor.CERTIFICATE
 )
 public class Armor {
 
-    public static final String MOD_ID = "dka";
-    public static final String MOD_NAME = "DKA";
-    public static final String VERSION = "1.0-SNAPSHOT";
+    public static final String MOD_ID = "dka",
+            MOD_NAME = "DKA", VERSION = "%VERSION%",
+            CERTIFICATE = "%CERTIFICATE%";
 
     /** This is the instance of your mod as created by Forge. It will never be null. */
     @Mod.Instance(MOD_ID)
