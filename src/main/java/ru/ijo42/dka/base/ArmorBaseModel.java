@@ -67,7 +67,7 @@ public abstract class ArmorBaseModel extends ModelBiped {
 
     /**
      * Feel free to override this method as needed.
-     * It's just required to hide armor parts depending on the equipment slot
+     * It's just required to hide chestplate parts depending on the equipment slot
      */
     public ModelBiped applySlot(EntityEquipmentSlot slot){
         armorHead.isHidden = true;
