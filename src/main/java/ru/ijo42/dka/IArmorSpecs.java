@@ -52,8 +52,10 @@ public interface IArmorSpecs {
 
     interface Effect {
 
+        @Nonnull
         PotionEffect getPotion();
 
+        @Nonnull
         Predicate<EntityPlayer> getCondition();
 
     }
