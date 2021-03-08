@@ -20,6 +20,9 @@ import ru.ijo42.dka.chestplates.class4.DKPC1Item;
 import ru.ijo42.dka.chestplates.class4.DKPC2Item;
 import ru.ijo42.dka.chestplates.class5.DKA5Item;
 import ru.ijo42.dka.chestplates.class5.DKA6Item;
+import ru.ijo42.dka.head.class4.DKH7Item;
+import ru.ijo42.dka.head.class5.DKH4Item;
+import ru.ijo42.dka.head.class5.DKH6Item;
 
 import java.util.Arrays;
 
@@ -78,15 +81,25 @@ public class Armor {
         @GameRegistry.ObjectHolder("dka6")
         public static final ArmorBaseItem DKA6 = new DKA6Item();
 
+
+        @GameRegistry.ObjectHolder("dkh7")
+        public static final ArmorBaseItem DKH7 = new DKH7Item();
+
+        @GameRegistry.ObjectHolder("dkh4")
+        public static final ArmorBaseItem DKH4 = new DKH4Item();
+
+        @GameRegistry.ObjectHolder("dkh6")
+        public static final ArmorBaseItem DKH6 = new DKH6Item();
+
         @SubscribeEvent
         public static void onRegistryItem(RegistryEvent.Register<Item> e) {
-            e.getRegistry().registerAll(DA1, DKA2, DKA3, DKA7, DKPC1, DKPC2, DKA5, DKA6);
+            e.getRegistry().registerAll(DA1, DKA2, DKA3, DKA7, DKPC1, DKPC2, DKA5, DKA6, DKH7, DKH4, DKH6);
         }
 
         @SubscribeEvent
         @SideOnly(Side.CLIENT)
         public static void onRegistryModel(ModelRegistryEvent e) {
-            for (ArmorBaseItem armorBaseItem : Arrays.asList(DA1, DKA2, DKA3, DKA7, DKPC1, DKPC2, DKA5, DKA6)) {
+            for (ArmorBaseItem armorBaseItem : Arrays.asList(DA1, DKA2, DKA3, DKA7, DKPC1, DKPC2, DKA5, DKA6, DKH7, DKH4, DKH6)) {
                 armorBaseItem.initModel();
             }
         }
