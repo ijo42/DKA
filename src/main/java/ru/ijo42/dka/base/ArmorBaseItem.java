@@ -43,22 +43,30 @@ public class ArmorBaseItem extends ItemArmor {
     @Nullable
     @Override
     public final ModelBiped getArmorModel(
-            EntityLivingBase entity,
-            ItemStack itemStack,
-            EntityEquipmentSlot armorSlot,
-            ModelBiped defaultArmor
+            @Nonnull EntityLivingBase entity,
+            @Nonnull ItemStack itemStack,
+            @Nonnull EntityEquipmentSlot armorSlot,
+            @Nonnull ModelBiped defaultArmor
     ) {
         return armorModel.applyEntityStats(defaultArmor).applySlot(armorSlot);
     }
 
     @Nullable
     @Override
-    public final String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+    public final String getArmorTexture(
+            @Nonnull ItemStack stack,
+            @Nonnull Entity entity,
+            @Nonnull EntityEquipmentSlot slot,
+            @Nonnull String type
+    ) {
         return armorModel.getTexture();
-	}
+    }
 
     @SideOnly(Side.CLIENT)
     public void initModel() {
+        if (getRegistryName() == null) {
+            throw new RuntimeException("Init registry name first");
+        }
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
