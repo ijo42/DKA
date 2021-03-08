@@ -13,6 +13,11 @@ import ru.ijo42.dka.base.ArmorBaseItem;
 import ru.ijo42.dka.chestplates.class1.DA1Item;
 import ru.ijo42.dka.chestplates.class2.DKA2Item;
 import ru.ijo42.dka.chestplates.class2.DKA3Item;
+import ru.ijo42.dka.chestplates.class4.DKA7Item;
+import ru.ijo42.dka.chestplates.class4.DKPC1Item;
+import ru.ijo42.dka.chestplates.class4.DKPC2Item;
+import ru.ijo42.dka.chestplates.class5.DKA5Item;
+import ru.ijo42.dka.chestplates.class5.DKA6Item;
 
 @Mod(
         modid = Armor.MOD_ID,
@@ -49,11 +54,31 @@ public class Armor {
         @GameRegistry.ObjectHolder("dka3")
         public static final ArmorBaseItem DKA3 = new DKA3Item();
 
+        @GameRegistry.ObjectHolder("dka7")
+        public static final ArmorBaseItem DKA7 = new DKA7Item();
+
+        @GameRegistry.ObjectHolder("dkpc1")
+        public static final ArmorBaseItem DKPC1 = new DKPC1Item();
+
+        @GameRegistry.ObjectHolder("dkpc2")
+        public static final ArmorBaseItem DKPC2 = new DKPC2Item();
+
+        @GameRegistry.ObjectHolder("dka5")
+        public static final ArmorBaseItem DKA5 = new DKA5Item();
+
+        @GameRegistry.ObjectHolder("dka6")
+        public static final ArmorBaseItem DKA6 = new DKA6Item();
+
         @SubscribeEvent
         public static void onRegistryItem(RegistryEvent.Register<Item> e) {
             e.getRegistry().register(DA1);
             e.getRegistry().register(DKA2);
             e.getRegistry().register(DKA3);
+            e.getRegistry().register(DKA7);
+            e.getRegistry().register(DKPC1);
+            e.getRegistry().register(DKPC2);
+            e.getRegistry().register(DKA5);
+            e.getRegistry().register(DKA6);
         }
 
         @SubscribeEvent
@@ -62,6 +87,11 @@ public class Armor {
             DA1.initModel();
             DKA2.initModel();
             DKA3.initModel();
+            DKA7.initModel();
+            DKPC1.initModel();
+            DKPC2.initModel();
+            DKA5.initModel();
+            DKA6.initModel();
         }
 
     }
