@@ -6,6 +6,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.util.EnumHelper;
 
 import javax.annotation.Nonnull;
@@ -20,8 +21,9 @@ public interface IArmorSpecs {
     @Nonnull
     Effect[] getRelatedEffects();
 
-    @Nonnull
-    ITextComponent getDescription();
+    default ITextComponent getDescription() {
+        return new TextComponentTranslation("item." + getName() + ".desc");
+    }
 
     @Nonnull
     String getName();
