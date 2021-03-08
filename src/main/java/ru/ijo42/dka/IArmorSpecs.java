@@ -28,6 +28,10 @@ public interface IArmorSpecs {
     @Nonnull
     String getName();
 
+    /*
+    implements note: restriction applies to helmet only.
+    ref: RestrictionViewListener.java#29L
+     */
     default boolean isRestrictView() {
         return false;
     }

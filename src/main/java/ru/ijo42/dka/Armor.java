@@ -3,8 +3,10 @@ package ru.ijo42.dka;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,6 +20,8 @@ import ru.ijo42.dka.chestplates.class4.DKPC1Item;
 import ru.ijo42.dka.chestplates.class4.DKPC2Item;
 import ru.ijo42.dka.chestplates.class5.DKA5Item;
 import ru.ijo42.dka.chestplates.class5.DKA6Item;
+
+import java.util.Arrays;
 
 @Mod(
         modid = Armor.MOD_ID,
@@ -39,6 +43,11 @@ public class Armor {
 
     public static ResourceLocation getResourceLocation(String key) {
         return new ResourceLocation(MOD_ID, key);
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new RestrictionViewListener());
     }
 
     @GameRegistry.ObjectHolder(MOD_ID)
@@ -71,27 +80,15 @@ public class Armor {
 
         @SubscribeEvent
         public static void onRegistryItem(RegistryEvent.Register<Item> e) {
-            e.getRegistry().register(DA1);
-            e.getRegistry().register(DKA2);
-            e.getRegistry().register(DKA3);
-            e.getRegistry().register(DKA7);
-            e.getRegistry().register(DKPC1);
-            e.getRegistry().register(DKPC2);
-            e.getRegistry().register(DKA5);
-            e.getRegistry().register(DKA6);
+            e.getRegistry().registerAll(DA1, DKA2, DKA3, DKA7, DKPC1, DKPC2, DKA5, DKA6);
         }
 
         @SubscribeEvent
         @SideOnly(Side.CLIENT)
         public static void onRegistryModel(ModelRegistryEvent e) {
-            DA1.initModel();
-            DKA2.initModel();
-            DKA3.initModel();
-            DKA7.initModel();
-            DKPC1.initModel();
-            DKPC2.initModel();
-            DKA5.initModel();
-            DKA6.initModel();
+            for (ArmorBaseItem armorBaseItem : Arrays.asList(DA1, DKA2, DKA3, DKA7, DKPC1, DKPC2, DKA5, DKA6)) {
+                armorBaseItem.initModel();
+            }
         }
 
     }

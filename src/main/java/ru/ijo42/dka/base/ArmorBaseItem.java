@@ -26,10 +26,12 @@ import java.util.function.Predicate;
 
 public class ArmorBaseItem extends ItemArmor {
 
+    protected static final int POTION_TICKS = 5;
+
     private final ArmorBaseModel armorModel;
     private final ITextComponent desk;
-    private final static int POTION_TICKS = 5;
     private final Map<Predicate<EntityPlayer>, PotionEffect> applicablePotions = new HashMap<>();
+    private final boolean isRestrictView;
     private int counter = 0;
 
     public ArmorBaseItem(
@@ -41,9 +43,22 @@ public class ArmorBaseItem extends ItemArmor {
         this.setRegistryName(getArmorMaterial().getName());
         this.setTranslationKey(specs.getName());
         this.desk = specs.getDescription();
+        this.isRestrictView = specs.isRestrictView();
         for (IArmorSpecs.Effect x : specs.getRelatedEffects()) {
-            applicablePotions.put(x.getCondition(), x.getPotion());
+            this.applicablePotions.put(x.getCondition(), x.getPotion());
         }
+    }
+
+    @Nullable
+    @Override
+    @SideOnly(Side.CLIENT)
+    public final ModelBiped getArmorModel(
+            @Nonnull EntityLivingBase entity,
+            @Nonnull ItemStack itemStack,
+            @Nonnull EntityEquipmentSlot armorSlot,
+            @Nonnull ModelBiped defaultArmor
+    ) {
+        return armorModel.applyEntityStats(defaultArmor).applySlot(armorSlot);
     }
 
     @SideOnly(Side.CLIENT)
@@ -65,17 +80,7 @@ public class ArmorBaseItem extends ItemArmor {
 
     @Nullable
     @Override
-    public final ModelBiped getArmorModel(
-            @Nonnull EntityLivingBase entity,
-            @Nonnull ItemStack itemStack,
-            @Nonnull EntityEquipmentSlot armorSlot,
-            @Nonnull ModelBiped defaultArmor
-    ) {
-        return armorModel.applyEntityStats(defaultArmor).applySlot(armorSlot);
-    }
-
-    @Nullable
-    @Override
+    @SideOnly(Side.CLIENT)
     public final String getArmorTexture(
             @Nonnull ItemStack stack,
             @Nonnull Entity entity,
@@ -91,6 +96,10 @@ public class ArmorBaseItem extends ItemArmor {
             throw new RuntimeException("Init registry name first");
         }
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    }
+
+    public boolean isRestrictView() {
+        return isRestrictView;
     }
 
 }
