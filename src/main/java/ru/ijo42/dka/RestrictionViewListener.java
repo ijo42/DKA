@@ -30,14 +30,13 @@ public class RestrictionViewListener {
         if (helmet instanceof ArmorBaseItem) {
             if (((ArmorBaseItem) helmet).isRestrictView()) {
                 if (mc.gameSettings.thirdPersonView == 0) {
-                    renderRestrictingOverlay();
+                    renderRestrictingOverlay(ev.getResolution());
                 }
             }
         }
     }
 
-    protected void renderRestrictingOverlay() {
-        ScaledResolution scaledresolution = new ScaledResolution(this.mc);
+    protected void renderRestrictingOverlay(ScaledResolution scaledresolution) {
         int i = scaledresolution.getScaledWidth();
         int j = scaledresolution.getScaledHeight();
 
@@ -46,13 +45,7 @@ public class RestrictionViewListener {
         GL11.glEnable(GL11.GL_BLEND);
         GlStateManager.disableDepth();
         GlStateManager.depthMask(false);
-        GlStateManager.tryBlendFuncSeparate(
-                GlStateManager.SourceFactor.SRC_ALPHA,
-                GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-                GlStateManager.SourceFactor.ONE,
-                GlStateManager.DestFactor.ZERO
-        );
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
         GlStateManager.disableAlpha();
         this.mc.getTextureManager().bindTexture(RESTRICTION_BLUR_TEX_PATH);
         Tessellator tessellator = Tessellator.getInstance();
@@ -66,7 +59,6 @@ public class RestrictionViewListener {
         GlStateManager.depthMask(true);
         GlStateManager.enableDepth();
         GlStateManager.enableAlpha();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         GL11.glDisable(GL11.GL_BLEND);
