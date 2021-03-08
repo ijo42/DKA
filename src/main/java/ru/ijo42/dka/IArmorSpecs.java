@@ -32,6 +32,11 @@ public interface IArmorSpecs {
         return false;
     }
 
+    default ArmorReduction getReduction() {
+        return new ArmorReduction() {
+        };
+    }
+
     default SoundEvent getSoundEvents() {
         return SoundEvents.ITEM_ARMOR_EQUIP_IRON;
     }
@@ -40,7 +45,7 @@ public interface IArmorSpecs {
         String name = Armor.getResourceLocation(this.getName()).toString();
         return EnumHelper
                 .addArmorMaterial(name, name,
-                        this.getDurability(), new int[]{2, 4, 6, 3}, 0,
+                        this.getDurability(), getReduction().getOutArray(), 0,
                         this.getSoundEvents(), this.getResistance()
                 );
     }
@@ -50,6 +55,30 @@ public interface IArmorSpecs {
         PotionEffect getPotion();
 
         Predicate<EntityPlayer> getCondition();
+
+    }
+
+    abstract class ArmorReduction {
+
+        int getByHead() {
+            return 2;
+        }
+
+        int getByChest() {
+            return 4;
+        }
+
+        int getByLegs() {
+            return 6;
+        }
+
+        int getByFeet() {
+            return 3;
+        }
+
+        final int[] getOutArray() {
+            return new int[]{getByHead(), getByChest(), getByLegs(), getByFeet()};
+        }
 
     }
 
