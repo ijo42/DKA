@@ -41,12 +41,33 @@ item.dka4.desc=Sed do eiusmod tempor incididunt
 item.dka4.name=Chestplate Class 5 #1
 
 
+item.dkh1.desc=Maecenas eu tincidunt lacus bibendum in nulla
+item.dkh1.name=Helmet Class 2
+
+item.dkh2.desc=Maecenas eu tincidunt lacus bibendum in nulla
+item.dkh2.name=Helmet Class 3 #1
+
+item.dkh3.desc=Maecenas eu tincidunt lacus bibendum in nulla
+item.dkh3.name=Helmet Class 3 #2
+
+item.dkoh1.desc=Maecenas eu tincidunt lacus bibendum in nulla
+item.dkoh1.name=Helmet Class 3 #3
+
 item.dkh7.desc=Maecenas eu tincidunt lacus bibendum in nulla
-item.dkh7.name=Helmet Class 4
+item.dkh7.name=Helmet Class 4 #1
+
+item.dkph1.desc=Maecenas eu tincidunt lacus bibendum in nulla
+item.dkph1.name=Helmet Class 4 #2
+
+item.dkph2.desc=Maecenas eu tincidunt lacus bibendum in nulla
+item.dkph2.name=Helmet Class 4 #3
 
 item.dkh4.desc=Duis pulvinar enim tellus, nec lobortis massa egestas et
 item.dkh4.name=Helmet Class 5 #1
 
+item.dkh5.desc=Duis pulvinar enim tellus, nec lobortis massa egestas et
+item.dkh5.name=Helmet Class 5 #2
+
 item.dkh6.desc= Orci varius natoque penatibus et magnis dis parturient montes
-item.dkh6.name=Helmet Class 5 #2
+item.dkh6.name=Helmet Class 5 #3
 
