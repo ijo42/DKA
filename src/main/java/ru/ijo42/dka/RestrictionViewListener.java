@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.opengl.GL11;
 import ru.ijo42.dka.base.ArmorBaseItem;
 
 public class RestrictionViewListener {
@@ -29,7 +28,7 @@ public class RestrictionViewListener {
         final Item helmet = mc.player.inventory.armorItemInSlot(3).getItem();
         if (helmet instanceof ArmorBaseItem) {
             if (((ArmorBaseItem) helmet).isRestrictView()) {
-                if (mc.gameSettings.thirdPersonView == 0) {
+                if (mc.gameSettings.thirdPersonView == 0 && ev.getType() == RenderGameOverlayEvent.ElementType.HELMET) {
                     renderRestrictingOverlay(ev.getResolution());
                 }
             }
@@ -41,8 +40,6 @@ public class RestrictionViewListener {
         int j = scaledresolution.getScaledHeight();
 
         GlStateManager.enableBlend();
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
-        GL11.glEnable(GL11.GL_BLEND);
         GlStateManager.disableDepth();
         GlStateManager.depthMask(false);
 
@@ -59,9 +56,6 @@ public class RestrictionViewListener {
         GlStateManager.depthMask(true);
         GlStateManager.enableDepth();
         GlStateManager.enableAlpha();
-
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        GL11.glDisable(GL11.GL_BLEND);
 
         GlStateManager.disableBlend();
     }
