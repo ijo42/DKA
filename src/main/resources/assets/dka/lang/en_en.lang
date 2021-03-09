@@ -7,6 +7,18 @@ item.dka2.name=Chestplate Class 2 #1
 item.dka3.desc=Sed do eiusmod tempor incididunt
 item.dka3.name=Chestplate Class 2 #2
 
+item.dka8.desc=Ut labore et dolore magna aliqua
+item.dka8.name=Chestplate Class 3 #1
+
+item.dka8.desc=Ut labore et dolore magna aliqua
+item.dka9.name=Chestplate Class 3 #2
+
+item.dko1.desc=Ut labore et dolore magna aliqua
+item.dko1.name=Chestplate Class 3 #3
+
+item.dko2.desc=Ut labore et dolore magna aliqua
+item.dko2.name=Chestplate Class 3 #4
+
 item.dka7.desc=Ut labore et dolore magna aliqua
 item.dka7.name=Chestplate Class 4 #1
 
@@ -16,11 +28,17 @@ item.dkpc1.name=Chestplate Class 4 #2
 item.dkpc2.desc=Laboris nisi ut aliquip ex ea commodo consequat
 item.dkpc2.name=Chestplate Class 4 #3
 
+item.dkpc3.desc=Laboris nisi ut aliquip ex ea commodo consequat
+item.dkpc3.name=Chestplate Class 4 #4
+
 item.dka5.desc=Duis aute irure dolor in reprehenderit in voluptate
-item.dka5.name=Chestplate Class 5 #1
+item.dka5.name=Chestplate Class 5 #2
 
 item.dka6.desc=Velit esse cillum dolore eu fugiat nulla pariatur
-item.dka6.name=Chestplate Class 5 #2
+item.dka6.name=Chestplate Class 5 #3
+
+item.dka4.desc=Sed do eiusmod tempor incididunt
+item.dka4.name=Chestplate Class 5 #1
 
 
 item.dkh7.desc=Maecenas eu tincidunt lacus bibendum in nulla
