@@ -1,8 +1,11 @@
 package ru.ijo42.dka.head.class4;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.ijo42.dka.IArmorSpecs;
 import ru.ijo42.dka.base.ArmorBaseItem;
+import ru.ijo42.dka.base.ArmorBaseModel;
 import ru.ijo42.dka.models.head.class4.DKH7;
 
 import javax.annotation.Nonnull;
@@ -12,8 +15,7 @@ public class DKH7Item extends ArmorBaseItem {
     public DKH7Item() {
         super(
                 new DKH7Specs(),
-                EntityEquipmentSlot.HEAD,
-                new DKH7()
+                EntityEquipmentSlot.HEAD
         );
     }
 
@@ -33,6 +35,12 @@ public class DKH7Item extends ArmorBaseItem {
         @Override
         public Effect[] getRelatedEffects() {
             return new Effect[0];
+        }
+
+        @Override
+        @SideOnly(Side.CLIENT)
+        public ArmorBaseModel getModel() {
+            return new DKH7();
         }
 
         @Nonnull

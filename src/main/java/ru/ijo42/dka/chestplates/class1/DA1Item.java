@@ -5,8 +5,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.ijo42.dka.IArmorSpecs;
 import ru.ijo42.dka.base.ArmorBaseItem;
+import ru.ijo42.dka.base.ArmorBaseModel;
 import ru.ijo42.dka.models.chestplate.class1.DA1;
 
 import javax.annotation.Nonnull;
@@ -17,8 +20,7 @@ public class DA1Item extends ArmorBaseItem {
     public DA1Item() {
         super(
                 new DA1Specs(),
-                EntityEquipmentSlot.CHEST,
-                new DA1()
+                EntityEquipmentSlot.CHEST
         );
     }
 
@@ -52,6 +54,12 @@ public class DA1Item extends ArmorBaseItem {
                         }
                     }
             };
+        }
+
+        @Override
+        @SideOnly(Side.CLIENT)
+        public ArmorBaseModel getModel() {
+            return new DA1();
         }
 
         @Nonnull

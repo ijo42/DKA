@@ -1,8 +1,5 @@
 package ru.ijo42.dka.base;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,9 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import ru.ijo42.dka.Armor;
 import ru.ijo42.dka.IArmorSpecs;
 
 import javax.annotation.Nonnull;
@@ -23,24 +21,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class ArmorBaseItem extends ItemArmor {
 
     protected static final int POTION_TICKS = 5;
 
-    private final ArmorBaseModel armorModel;
     private final ITextComponent desk;
+    @SideOnly(Side.CLIENT)
+    private Supplier<ArmorBaseModel> armorModel;
     private final Map<Predicate<EntityPlayer>, PotionEffect> applicablePotions = new HashMap<>();
     private final boolean isRestrictView;
     private int counter = 0;
 
     public ArmorBaseItem(
-            IArmorSpecs specs, EntityEquipmentSlot equipmentSlot,
-            ArmorBaseModel armorModel
+            IArmorSpecs specs, EntityEquipmentSlot equipmentSlot
     ) {
         super(specs.getMaterial(), 0, equipmentSlot);
-        this.armorModel = armorModel;
-        this.setRegistryName(getArmorMaterial().getName());
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            this.armorModel = specs::getModel;
+            this.setRegistryName(specs.getMaterial().getName());
+        } else {
+            this.setRegistryName(Armor.getResourceLocation(specs.getName()).toString());
+        }
         this.setTranslationKey(specs.getName());
         this.desk = specs.getDescription();
         this.isRestrictView = specs.isRestrictView();
@@ -52,17 +55,22 @@ public class ArmorBaseItem extends ItemArmor {
     @Nullable
     @Override
     @SideOnly(Side.CLIENT)
-    public final ModelBiped getArmorModel(
+    public final net.minecraft.client.model.ModelBiped getArmorModel(
             @Nonnull EntityLivingBase entity,
             @Nonnull ItemStack itemStack,
             @Nonnull EntityEquipmentSlot armorSlot,
-            @Nonnull ModelBiped defaultArmor
+            @Nonnull net.minecraft.client.model.ModelBiped defaultArmor
     ) {
-        return armorModel.applyEntityStats(defaultArmor).applySlot(armorSlot);
+        return armorModel.get().applyEntityStats(defaultArmor).applySlot(armorSlot);
     }
 
     @SideOnly(Side.CLIENT)
-    public void addInformation(@Nonnull ItemStack stack, World world, List<String> tooltip, @Nonnull ITooltipFlag flag) {
+    public void addInformation(
+            @Nonnull ItemStack stack,
+            World world,
+            List<String> tooltip,
+            @Nonnull net.minecraft.client.util.ITooltipFlag flag
+    ) {
         tooltip.add(desk.getFormattedText());
     }
 
@@ -87,7 +95,7 @@ public class ArmorBaseItem extends ItemArmor {
             @Nonnull EntityEquipmentSlot slot,
             @Nonnull String type
     ) {
-        return armorModel.getTexture();
+        return armorModel.get().getTexture();
     }
 
     @SideOnly(Side.CLIENT)
@@ -95,9 +103,14 @@ public class ArmorBaseItem extends ItemArmor {
         if (getRegistryName() == null) {
             throw new RuntimeException("Init registry name first");
         }
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        net.minecraftforge.client.model.ModelLoader
+                .setCustomModelResourceLocation(this, 0,
+                        new net.minecraft.client.renderer.block.model.ModelResourceLocation(
+                                getRegistryName(), "inventory")
+                );
     }
 
+    @SideOnly(Side.CLIENT)
     public boolean isRestrictView() {
         return isRestrictView;
     }

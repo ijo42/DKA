@@ -8,6 +8,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import ru.ijo42.dka.base.ArmorBaseModel;
 
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
@@ -24,6 +27,9 @@ public interface IArmorSpecs {
     default ITextComponent getDescription() {
         return new TextComponentTranslation("item." + getName() + ".desc");
     }
+
+    @SideOnly(Side.CLIENT)
+    ArmorBaseModel getModel();
 
     @Nonnull
     String getName();
