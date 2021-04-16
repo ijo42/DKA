@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ru.ijo42.dka.base.ArmorBaseItem;
-
+//TODO: reimpl w/ Item.renderHelmetOverlay()
 public class RestrictionViewListener {
 
     protected static final ResourceLocation RESTRICTION_BLUR_TEX_PATH =
