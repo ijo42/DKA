@@ -34,6 +34,27 @@ sourceCompatibility = targetCompatibility = '1.8'
 
 minecraft {
     mappings channel: 'stable', version: mcp_version
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+    }
 }
 
 processResources {
@@ -95,3 +116,6 @@ static def getGitHash() {
 jar.finalizedBy('reobfJar')
 apply from: 'https://gist.github.com/ijo42/6b215e76269a72f37194b924ddda038e/raw/d782226840813ae6703044c51e98b61eb4675875/signjar.groovy'
 build.dependsOn signJar
+
+// Hack to include resources for Forge 1.12.2 using FG3
+sourceSets { main { output.resourcesDir = output.classesDirs[0] } }
